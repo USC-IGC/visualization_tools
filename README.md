@@ -1,8 +1,10 @@
 # IGC Visualization Tools
 
-These tools are provided to create figures reflecting the relevant study statistics.
+These tools are provided to create figures for processing or publication 
 
 ## Cortical Surfaces
+
+These tools are provided to create figures reflecting the relevant study statistics.
 
 #### MATLAB
 
@@ -41,3 +43,12 @@ Written in bash
 Required software
 * ImageMagick
 * ANTs
+
+## White Matter
+
+## JHU_rois.py
+
+Written in python
+
+Required package:
+* nibabel
