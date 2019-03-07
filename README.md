@@ -2,7 +2,7 @@
 
 These tools are provided to create figures reflecting the relevant study statistics.
 
-### Cortical Surfaces
+## Cortical Surfaces
 
 #### MATLAB
 
@@ -26,10 +26,18 @@ Required environmental variable:
 
 #### R
 
-### Hippocampal Subfields
+## Hippocampal Subfields
 
 Written in python
 
 Required packages: 
 * nibabel
 * plotly
+
+## QC Images
+
+Written in bash
+
+Required software
+* ImageMagick
+* ANTs
