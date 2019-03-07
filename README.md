@@ -46,7 +46,7 @@ Required software
 
 ## White Matter
 
-## JHU_rois.py
+#### JHU_rois.py
 
 Written in python
 
