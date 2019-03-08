@@ -16,7 +16,7 @@ import os
 
 parser = argparse.ArgumentParser(description="stat_brain_surface.py takes in a spreadsheet or text file (xls, xlsx, csv, tsv, txt) and maps the statistics to the cortical surface. Please provide either a vertex_file OR roi_file but NOT BOTH. One HTML file will be output per statistic column.")
 parser.add_argument("-s", "--hemisphere", help="Hemisphere to render", choices=["left", "right", "l", "r"])
-parser.add_argument("-v", "--vertex_file", help="file with vertex coordinates and associated statistic(s). The first three columns will be assumed to be the x, y, and z coordinates of the vertex, and following columns will be considered as statistics. Please DO NOT include spaces or special characters in column headers.")
+# parser.add_argument("-v", "--vertex_file", help="file with vertex coordinates and associated statistic(s). The first three columns will be assumed to be the x, y, and z coordinates of the vertex, and following columns will be considered as statistics. Please DO NOT include spaces or special characters in column headers.")
 parser.add_argument("-r", "--roi_file", help="file with regions of interest and associated statistic(s). Column headers should be ROI for the regions of interest column and statistic name for the rest (e.g., p-value). Please DO NOT include spaces or special characters in column headers.")
 parser.add_argument("-p", "--out_prefix", help="Output prefix for the name of HTML file(s) to output")
 parser.add_argument("-a", "--atlas", help="(Optional) Atlas to use for ROI parcellation. Default: aparc", default="aparc")
@@ -26,32 +26,6 @@ args = parser.parse_args()
 
 # plotly colorscale options: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis
 # may need to set marker.line.cmin/cmax and colorbar.tick*
-
-# def stat2rgb(df, cmap='YlOrRd'):
-#     cmap = cl.scales['9']['seq'][cmap]
-#     cmap_interp = cl.to_rgb(cl.interp(cmap, 100))
-# 
-#     dfcols = df.columns
-#     for c in dfcols:
-#         vmin = np.amin(df[c])
-#         vmax = np.amax(df[c])
-#         percentages = round((vmax-df[c])/(vmax-vmin)*100).astype(int)
-#         percentages[percentages == 100] = 99
-#         df[c+'_rgb'] = percentages.apply(lambda x: cmap_interp[x])
-#     return df
-# 
-# rgb_df = stat2rgb(df)
-# 
-# def parc_color(v1, v2, v3, stat, ctab, labels):
-#     if len(np.unique([labels[v1], labels[v2], labels[v3]])) == 1:
-#         if labels[v1] == 0:
-#             return "rgb({}, {}, {})".format(*ctab[labels[v1]][:3])
-#         else:
-#             roi = labelix2name[labels[v1]] 
-#             return rgb_df.loc[roi, stat+"_rgb"]
-#     else:
-#         # return "rgb(25, 5, 25)"
-#         return "rgb({}, {}, {})".format(*ctab[labels[0]][:3])
 
 def vertex_color(labels, stat, df):
     vertex_colors = []
@@ -66,10 +40,11 @@ def vertex_color(labels, stat, df):
 
 ### PARSE INPUTS/SETUP VARIABLES
 
-if args.vertex_file:
-    stat_file = args.vertex_file 
-elif args.roi_file:
-    stat_file = args.roi_file
+# if args.vertex_file:
+#     stat_file = args.vertex_file 
+# elif args.roi_file:
+#     stat_file = args.roi_file
+stat_file = args.roi_file
 
 if stat_file.endswith(".csv"):
     df = pd.read_csv(stat_file, index_col="ROI")
@@ -106,7 +81,7 @@ for stat in stats:
                       text=hoverlabels,
                       hoverinfo='text',
                       hoverlabel={'bgcolor': "white"},
-                      color="#7D7D7D"
+                      color="#C0C0C0"
                       # facecolor=annot,
                       # intensity=vertex_colors,
                       # colorscale="YlOrRd",
@@ -115,9 +90,10 @@ for stat in stats:
                       #           'nticks': 5}
                       )]
 
-    if args.vertex_file:
-        annot = ['rgb({},{},{})'.format(*vertex_color(v1,v2,v3)) for v1,v2,v3 in faces]
-    elif args.roi_file:
+    # if args.vertex_file:
+    #     annot = ['rgb({},{},{})'.format(*vertex_color(v1,v2,v3)) for v1,v2,v3 in faces]
+    # elif args.roi_file:
+    if args.roi_file:
         labelix2name = {}
         for roi in df.index:
             if roi in labnames:
@@ -151,11 +127,15 @@ for stat in stats:
 
     layout = go.Layout(
         title=stat,
+        width=1000,
+        height=1000,
         scene=dict(
             xaxis=dict(
                 showbackground=False,
                 showticklabels=False,
                 showgrid=False,
+                zeroline=False,
+                # showspikes=False,
                 title="",
                 gridcolor='rgb(255, 255, 255)',
                 zerolinecolor='rgb(255, 255, 255)',
@@ -165,6 +145,8 @@ for stat in stats:
                 showbackground=False,
                 showticklabels=False,
                 showgrid=False,
+                zeroline=False,
+                # showspikes=False,
                 title="",
                 gridcolor='rgb(255, 255, 255)',
                 zerolinecolor='rgb(255, 255, 255)',
@@ -174,6 +156,8 @@ for stat in stats:
                 showbackground=False,
                 showticklabels=False,
                 showgrid=False,
+                zeroline=False,
+                # showspikes=False,
                 title="",
                 gridcolor='rgb(255, 255, 255)',
                 zerolinecolor='rgb(255, 255, 255)',
