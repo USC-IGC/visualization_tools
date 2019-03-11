@@ -19,6 +19,8 @@ Error in map_corticalResults_inFS_ROIs_2panel_2hemi (line 135)
 
 #### Python
 
+**stat_brain_surface.py**
+
 Required packages: 
 * nibabel
 * plotly
@@ -46,7 +48,9 @@ Required software
 
 ## White Matter
 
-#### JHU_rois.py
+#### JHU ROIs
+
+**JHU_rois.py**
 
 Written in python
 
