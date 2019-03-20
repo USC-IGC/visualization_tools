@@ -71,7 +71,7 @@ for i, row in ef.iterrows():
         if i+"-R" in jhu_dict.index:
             vals = list(jhu_dict.loc[[i+"-R", i+"-L"], "ROI"])
         else:
-            print("Warning: %s is not a valid ROI name\n")
+            print("Warning: %s is not a valid ROI name\n" %i)
             continue
     for c in ef.columns:
         for v in vals:
