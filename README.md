@@ -27,6 +27,11 @@ Code languages available:
 Code languages available:
 * Python
 
+## Voxel Maps
+
+Code languages available:
+* MATLAB
+
 ## White Matter
 
 These tools are provided to create figures reflecting the relevant study statistics on _JHU ROIs_.
