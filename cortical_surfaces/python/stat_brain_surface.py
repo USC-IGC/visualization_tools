@@ -64,8 +64,8 @@ if "FREESURFER_HOME" not in os.environ.keys():
     print("\nPlease make sure that the environmental variable FREESURFER_HOME is set\n")
     sys.exit(1)
 
-coords, faces = nib.freesurfer.io.read_geometry(os.path.join(os.environ["FREESURFER_HOME"], "subjects/fsaverage5/surf/{hemi}.pial".format(hemi=hemi)))
-labels, ctab, labnames = nib.freesurfer.io.read_annot(os.path.join(os.environ["FREESURFER_HOME"], "subjects/fsaverage5/label/{hemi}.{parc}.annot".format(hemi=hemi, parc=args.atlas)))
+coords, faces = nib.freesurfer.io.read_geometry(os.path.join(os.environ["FREESURFER_HOME"], "subjects/fsaverage/surf/{hemi}.pial".format(hemi=hemi)))
+labels, ctab, labnames = nib.freesurfer.io.read_annot(os.path.join(os.environ["FREESURFER_HOME"], "subjects/fsaverage/label/{hemi}.{parc}.annot".format(hemi=hemi, parc=args.atlas)))
 
 if isinstance(labnames[0][0], int):
     labnames = [ll.decode("ASCII") for ll in labnames]
