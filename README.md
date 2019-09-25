@@ -20,7 +20,8 @@ Work in progress
 ## QC Images
 
 Code languages available:
-* bash
+* Python
+* bash (in progress)
 
 ## Sulci
 
