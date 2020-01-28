@@ -20,6 +20,9 @@ parser.add_argument("-s", "--hemisphere", help="Hemisphere to render", choices=[
 parser.add_argument("-r", "--roi_file", help="file with regions of interest and associated statistic(s). Column headers should be ROI for the regions of interest column and statistic name for the rest (e.g., p-value). Please DO NOT include spaces or special characters in column headers.")
 parser.add_argument("-p", "--out_prefix", help="Output prefix for the name of HTML file(s) to output")
 parser.add_argument("-a", "--atlas", help="(Optional) Atlas to use for ROI parcellation. Default: aparc", default="aparc")
+parser.add_argument("-c", "--colormap", help="(Optional) Colormap. Default: YlOrRd", default="YlOrRd")
+parser.add_argument("--cmin", help="(Optional) Colormap minimum", type=float)
+parser.add_argument("--cmax", help="(Optional) Colormap maximum", type=float)
 args = parser.parse_args()
 
 ### DEFINE FUNCTIONS
@@ -119,7 +122,7 @@ for stat in stats:
                            text=[hoverlabels[v] for v in vertices_to_keep],
                            hoverinfo='text',
                            intensity=vertex_colors,
-                           colorscale="YlOrRd",
+                           colorscale=args.colormap,
                            colorbar={'title': stat,
                                      'tickmode': 'auto',
                                      'nticks': 10}
@@ -167,6 +170,10 @@ for stat in stats:
     )
 
     fig = go.Figure(data=data, layout=layout)
+    if args.cmin:
+        fig.data[1].update(cmin=args.cmin)
+    if args.cmax:
+        fig.data[1].update(cmax=args.cmax)
     fn = "_".join([args.out_prefix, hemi, args.atlas, stat+".html"])
     py.plot(fig, filename=fn, auto_open=False)
     print("\nCreated {}\n".format(fn)) 
