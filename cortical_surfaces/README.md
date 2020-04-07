@@ -25,13 +25,16 @@ Required environmental variable:
 Usage: `stat_brain_surface.py -s {left,right,l,r} -r ROI_FILE
                              -p OUT_PREFIX [-a ATLAS]`
 
-`stat_brain_surface.py` takes in a spreadsheet or text file (xls, xlsx, csv,
-tsv, txt) and maps the statistics to the cortical surface. One HTML file will be output
+`stat_brain_surface.py` takes in a either a vertex_file (mgh) OR roi_file (xls, xlsx, csv,
+tsv, txt) and maps the statistics to the cortical surface. For ROI files, one HTML file will be output
 per statistic column.
 
 required arguments:
 * `-s {left,right,l,r}, --hemisphere {left,right,l,r}`
                         Hemisphere to render
+* `-v VERTEX_FILE, --vertex_file VERTEX_FILE`
+                        FreeSurfer mgh file with vertex-associated statistic.
+
 * `-r ROI_FILE, --roi_file ROI_FILE`
                         file with regions of interest and associated
                         statistic(s). Column headers should be ROI for the
@@ -46,6 +49,13 @@ optional arguments:
 * `-a ATLAS, --atlas ATLAS`
                         Atlas to use for ROI parcellation. Default:
                         aparc
+* `-c COLORMAP, --colormap COLORMAP`
+                        (Optional) Colormap. Default: YlOrRd
+* `--cmin CMIN [CMIN ...]`
+                        (Optional) Colormap minimum, provide one per stat
+* `--cmax CMAX [CMAX ...]`
+                        (Optional) Colormap maximum, provide one per stat
+
 
 ### R
 
