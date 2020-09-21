@@ -61,7 +61,7 @@ FSlabels6=num2cell(FSlabels(:,1));
 if semiinflated == 1
     FScoordL=textread(char('LH.pial_semi_inflated.coord.txt')); 
 else
-FScoordL=textread(char('RH.pial.coord.txt')); 
+FScoordL=textread(char('LH.pial.coord.txt')); 
 end 
 FacesL=textread(char('LH.pial.faces.txt'));  
 XL=FScoordL(:,1);YL=FScoordL(:,2);ZL=FScoordL(:,3);
