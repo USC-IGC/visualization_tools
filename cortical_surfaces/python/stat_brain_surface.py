@@ -22,8 +22,8 @@ parser.add_argument("-r", "--roi_file", help="file with regions of interest and 
 parser.add_argument("-p", "--out_prefix", help="Output prefix for the name of HTML file(s) to output")
 parser.add_argument("-a", "--atlas", help="(Optional) Atlas to use for ROI parcellation. Default: aparc", default="aparc")
 parser.add_argument("-c", "--colormap", help="(Optional) Colormap. Default: YlOrRd", default="YlOrRd")
-parser.add_argument("--cmin", nargs="+", help="(Optional) Colormap minimum, provide one per stat", type=float)
-parser.add_argument("--cmax", nargs="+", help="(Optional) Colormap maximum, provide one per stat", type=float)
+parser.add_argument("--cmin", nargs="+", help="(Optional) Colormap minimum, provide one per stat", type=float, default=[])
+parser.add_argument("--cmax", nargs="+", help="(Optional) Colormap maximum, provide one per stat", type=float, default=[])
 args = parser.parse_args()
 # plotly colorscale options: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis
 
